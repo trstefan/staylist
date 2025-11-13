@@ -1,6 +1,6 @@
-import { Film } from "@/types/film";
+import { Song } from "@/types/song";
 
-const films: Film[] = [
+const songs: Song[] = [
   {
     id: 1,
     title: "In the Mood for Love",
@@ -73,4 +73,4 @@ const films: Film[] = [
   },
 ];
 
-export default films;
+export default songs;

@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { Film } from "@/types/film";
-import FilmList from "@/components/FilmDatabase/FilmList";
-import films from "@/data/films";
 
-export default function FilmDatabase() {
+import SongList from "@/components/SongDatabase/SongList";
+import songs from "@/data/songs";
+
+export default function SongsDatabase() {
   const [expandedId, setExpandedId] = useState<number | null>(null);
 
   const toggleExpand = (id: number) => {
@@ -24,8 +24,8 @@ export default function FilmDatabase() {
       </header>
 
       <main className=" ">
-        <FilmList
-          films={films}
+        <SongList
+          songs={songs}
           expandedId={expandedId}
           onToggle={toggleExpand}
         />
@@ -37,5 +37,3 @@ export default function FilmDatabase() {
     </div>
   );
 }
-
-// you can move the film array to a separate file if needed

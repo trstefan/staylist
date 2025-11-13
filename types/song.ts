@@ -1,4 +1,4 @@
-export interface Film {
+export interface Song {
   id: number;
   title: string;
   year: number;

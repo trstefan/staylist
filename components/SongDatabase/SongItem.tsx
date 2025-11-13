@@ -1,25 +1,25 @@
 "use client";
 
-import { Film } from "@/types/film";
-import FilmDetails from "./FilmDetails";
+import { Song } from "@/types/song";
+import SongDetails from "./SongDetails";
 
-interface FilmItemProps {
-  film: Film;
+interface SongItemProps {
+  song: Song;
   index: number;
   isExpanded: boolean;
   onToggle: (id: number) => void;
 }
 
-export default function FilmItem({
-  film,
+export default function SongItem({
+  song,
   index,
   isExpanded,
   onToggle,
-}: FilmItemProps) {
+}: SongItemProps) {
   return (
     <div className="group">
       <button
-        onClick={() => onToggle(film.id)}
+        onClick={() => onToggle(song.id)}
         className="flex w-full items-center justify-between py-4 md:py-5 text-left"
       >
         <div className="w-8 shrink-0 text-xs tabular-nums md:w-12 md:text-sm">
@@ -41,12 +41,12 @@ export default function FilmItem({
               isExpanded ? "opacity-100" : "group-hover:opacity-60"
             }`}
           >
-            {film.title}
+            {song.title}
           </h3>
         </div>
 
         <div className="w-8 shrink-0 text-right text-xs tabular-nums md:w-12 md:text-sm">
-          {film.year}
+          {song.year}
         </div>
       </button>
 
@@ -58,7 +58,7 @@ export default function FilmItem({
         }`}
       >
         <div className="overflow-hidden">
-          <FilmDetails film={film} />
+          <SongDetails song={song} />
         </div>
       </div>
     </div>
