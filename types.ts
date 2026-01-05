@@ -18,12 +18,9 @@ export interface Track {
   artist: string;
   album: string;
   year: string;
-  duration: string;
   genre: string;
   description: string;
   coverImage: string;
-  credits: string[];
-  bpm: number;
 }
 
 export interface NavItem {

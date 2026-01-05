@@ -1,0 +1,22 @@
+generator client {
+  provider    = "prisma-client-js"
+  engineType  = "client"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Song {
+  id             String   @id @default(uuid())
+  spotifyTrackId String   @unique
+  title          String
+  artist         String
+  album          String
+  albumCover     String
+  releaseDate    String
+  previewUrl     String?
+  spotifyUrl     String
+  description    String?
+  createdAt      DateTime @default(now())
+}
