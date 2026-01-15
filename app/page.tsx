@@ -29,7 +29,9 @@ export default function Page() {
           </h3>
           <div className="flex justify-center">
             <Link href="/suggest-a-song" className="">
-              <NeonButton variant="primary">Submit Recommendation</NeonButton>
+              <NeonButton variant="primary" className="hover:cursor-pointer">
+                Submit Recommendation
+              </NeonButton>
             </Link>
           </div>
         </div>
