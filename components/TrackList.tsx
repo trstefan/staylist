@@ -1,123 +1,32 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Track } from "../types";
 import { TrackItem } from "./TrackItem";
 import { motion } from "framer-motion";
-
-const TRACK_DATA: Track[] = [
-  {
-    id: "1",
-    number: "01",
-    title: "Respect",
-    artist: "Aretha Franklin",
-    album: "I Never Loved a Man the Way I Love You",
-    year: "1967",
-    genre: "Soul / R&B",
-    description:
-      "Originally written by Otis Redding, Aretha Franklin’s version transformed the song into a global anthem for the Civil Rights and feminist movements. Her powerful delivery and the addition of the 'R-E-S-P-E-C-T' chorus cemented her title as the Queen of Soul.",
-    coverImage: "https://picsum.photos/id/1025/800/800",
-  },
-  {
-    id: "2",
-    number: "02",
-    title: "Like a Rolling Stone",
-    artist: "Bob Dylan",
-    album: "Highway 61 Revisited",
-    year: "1965",
-    genre: "Folk Rock",
-    description:
-      "Widely considered the most influential song in rock history, it shattered the three-minute pop song mold. Dylan’s snarling vocals and poetic, confrontational lyrics bridged the gap between folk earnestness and rock rebellion.",
-    coverImage: "https://picsum.photos/id/1031/800/800",
-  },
-  {
-    id: "3",
-    number: "03",
-    title: "A Change Is Gonna Come",
-    artist: "Sam Cooke",
-    album: "Ain't That Good News",
-    year: "1964",
-    genre: "Soul",
-    description:
-      "Inspired by Bob Dylan’s 'Blowin’ in the Wind' and Cooke’s own experiences with racism, this orchestral masterpiece became the definitive soundtrack of the American Civil Rights Movement, capturing both pain and hope.",
-    coverImage: "https://picsum.photos/id/1041/800/800",
-  },
-  {
-    id: "4",
-    number: "04",
-    title: "Smells Like Teen Spirit",
-    artist: "Nirvana",
-    album: "Nevermind",
-    year: "1991",
-    genre: "Grunge / Alternative Rock",
-    description:
-      "The 'anthem for apathetic kids,' this track brought the Seattle grunge sound to the mainstream. Its quiet-loud dynamic and Kurt Cobain’s raw energy signaled the end of 80s hair metal and the birth of Generation X’s cultural dominance.",
-    coverImage: "https://picsum.photos/id/1050/800/800",
-  },
-  {
-    id: "5",
-    number: "05",
-    title: "What’s Going On",
-    artist: "Marvin Gaye",
-    album: "What's Going On",
-    year: "1971",
-    genre: "Soul / Motown",
-    description:
-      "A sophisticated plea for peace and social justice, this track broke the Motown hit-making formula. Its lush production and Gaye’s multi-layered vocals created a timeless meditation on war, poverty, and ecological issues.",
-    coverImage: "https://picsum.photos/id/1062/800/800",
-  },
-
-  {
-    id: "6",
-    number: "06",
-    title: "Bohemian Rhapsody",
-    artist: "Queen",
-    album: "A Night at the Opera",
-    year: "1975",
-    genre: "Progressive Rock / Operatic Pop",
-    description:
-      "A suite of distinct sections including a ballad, an operatic middle, and a hard rock finale. Freddie Mercury’s masterpiece defied radio conventions and remains one of the most beloved vocal performances in history.",
-    coverImage: "https://picsum.photos/id/1081/800/800",
-  },
-  {
-    id: "7",
-    number: "07",
-    title: "Dreams",
-    artist: "Fleetwood Mac",
-    album: "Rumours",
-    year: "1977",
-    genre: "Soft Rock",
-    description:
-      "Written by Stevie Nicks during the band’s infamous internal turmoil, 'Dreams' is a masterclass in atmospheric songwriting. Its steady groove and ethereal lyrics about moving on have given it a lasting resonance across generations.",
-    coverImage: "https://picsum.photos/id/1020/800/800",
-  },
-  {
-    id: "8",
-    number: "08",
-    title: "Fight the Power",
-    artist: "Public Enemy",
-    album: "Fear of a Black Planet",
-    year: "1989",
-    genre: "Hardcore Hip Hop",
-    description:
-      "Commissioned by Spike Lee for 'Do the Right Thing', this track is a sonic explosion of samples and revolutionary rhetoric. It redefined the political potential of hip hop and remains a cornerstone of protest music.",
-    coverImage: "https://picsum.photos/id/1015/800/800",
-  },
-  {
-    id: "9",
-    number: "09",
-    title: "Billie Jean",
-    artist: "Michael Jackson",
-    album: "Thriller",
-    year: "1982",
-    genre: "Pop / Funk",
-    description:
-      "With its instantly recognizable bassline and innovative production, 'Billie Jean' helped Thriller become the best-selling album of all time. It broke racial barriers on MTV and established Jackson as a global superstar.",
-    coverImage: "https://picsum.photos/id/1011/800/800",
-  },
-];
+import { Loader2, Music2 } from "lucide-react";
 
 export const TrackList: React.FC = () => {
+  const [tracks, setTracks] = useState<Track[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [openId, setOpenId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchSongs = async () => {
+      try {
+        const response = await fetch('/api/songs');
+        if (!response.ok) throw new Error('Failed to fetch songs');
+        const data = await response.json();
+        setTracks(data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'An error occurred');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchSongs();
+  }, []);
 
   const handleToggle = (id: string) => {
     setOpenId(openId === id ? null : id);
@@ -135,7 +44,7 @@ export const TrackList: React.FC = () => {
               viewport={{ once: true }}
               className="text-sm font-mono text-primary uppercase tracking-widest"
             >
-              // Selected Works
+              // Community Submissions
             </motion.h2>
           </div>
         </div>
@@ -149,18 +58,52 @@ export const TrackList: React.FC = () => {
           <div className="col-span-2 text-right">Expand</div>
         </div>
 
+        {/* Loading State */}
+        {isLoading && (
+          <div className="py-20 flex flex-col items-center justify-center gap-4">
+            <Loader2 className="w-8 h-8 text-primary animate-spin" />
+            <span className="text-[10px] font-mono uppercase text-primary tracking-widest animate-pulse">
+              Retrieving Signals...
+            </span>
+          </div>
+        )}
+
+        {/* Error State */}
+        {error && (
+          <div className="py-20 text-center">
+            <div className="p-4 bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-mono uppercase tracking-widest inline-block">
+              {error}
+            </div>
+          </div>
+        )}
+
+        {/* Empty State */}
+        {!isLoading && !error && tracks.length === 0 && (
+          <div className="py-20 flex flex-col items-center justify-center gap-4">
+            <div className="w-16 h-16 bg-white/5 border border-white/10 rounded-full flex items-center justify-center">
+              <Music2 className="w-6 h-6 text-muted-foreground/50" />
+            </div>
+            <p className="text-muted-foreground font-mono text-xs uppercase tracking-widest text-center">
+              No signals in the archive yet.<br/>
+              Be the first to submit a track.
+            </p>
+          </div>
+        )}
+
         {/* Tracks */}
-        <div className="flex flex-col">
-          {TRACK_DATA.map((track, index) => (
-            <TrackItem
-              key={track.id}
-              track={track}
-              isOpen={openId === track.id}
-              onToggle={() => handleToggle(track.id)}
-              index={index}
-            />
-          ))}
-        </div>
+        {!isLoading && !error && tracks.length > 0 && (
+          <div className="flex flex-col">
+            {tracks.map((track, index) => (
+              <TrackItem
+                key={track.id}
+                track={track}
+                isOpen={openId === track.id}
+                onToggle={() => handleToggle(track.id)}
+                index={index}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

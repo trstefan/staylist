@@ -137,6 +137,9 @@ export const TrackItem: React.FC<TrackItemProps> = ({
                   <p className="text-lg md:text-xl font-light leading-relaxed text-gray-200 mb-8 selection:bg-primary/30">
                     {track.description}
                   </p>
+                  <p>
+                    
+                  </p>
                 </div>
 
                 {/* Action Area */}

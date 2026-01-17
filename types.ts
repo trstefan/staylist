@@ -21,6 +21,7 @@ export interface Track {
   genre: string;
   description: string;
   coverImage: string;
+  url: string;
 }
 
 export interface NavItem {
