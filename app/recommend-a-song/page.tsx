@@ -38,15 +38,10 @@ export default function Page() {
            className="max-w-6xl mx-auto"
         >
           {/* Section Header */}
-          <motion.div variants={itemVariants} className="mb-16 border-b border-white/10 pb-12">
-            <div className="flex items-center gap-3 mb-6">
-              <Activity size={16} className="text-[#39FF14] animate-pulse" />
-              <span className="text-xs font-mono uppercase text-[#39FF14] tracking-[0.3em] font-bold">// Archival_Submission</span>
-            </div>
-            
+          <motion.div variants={itemVariants} className="mb-16 border-b border-white/10 pb-12">        
             <h1 className="text-6xl md:text-8xl lg:text-9xl font-black uppercase tracking-tighter leading-[0.85] text-white">
               Signal <br/>
-              <span className="text-[#39FF14] neon-text" style={{ textShadow: '0 0 30px rgba(57,255,20,0.4)' }}>Input</span>
+                <span className="text-white/20">Input</span>
             </h1>
           </motion.div>
 
@@ -55,7 +50,7 @@ export default function Page() {
             <div className="md:col-span-5 space-y-8">
               <motion.div variants={itemVariants}>
                 <p className="text-xl md:text-2xl text-white font-medium leading-tight tracking-tight mb-6">
-                  Help expand the <span className="text-[#39FF14] italic">Permanent Record</span>. 
+                  Help expand the <span className="text-[#10b981] italic">Permanent Record</span>. 
                 </p>
                 <p className="text-muted-foreground leading-relaxed font-light">
                   Staylist is a curated sanctuary for sound. We rely on the community to identify high-fidelity signals that deserve a place in our decentralized archive. 
@@ -66,16 +61,16 @@ export default function Page() {
               </motion.div>
 
               <motion.div variants={itemVariants} className="p-6 border border-white/10 bg-white/[0.02] rounded-sm">
-                <h4 className="text-[10px] font-mono text-[#39FF14] uppercase tracking-widest mb-4">Transfer Protocols</h4>
+                <h4 className="text-[10px] font-mono text-[#10b981] uppercase tracking-widest mb-4">Transfer Protocols</h4>
                 <ul className="space-y-3 text-[11px] font-mono text-muted-foreground uppercase tracking-wider">
                   <li className="flex items-start gap-3">
-                    <span className="text-[#39FF14]">01</span> Verification of source integrity required.
+                    <span className="text-[#10b981]">01</span> Verification of source integrity required.
                   </li>
                   <li className="flex items-start gap-3">
-                    <span className="text-[#39FF14]">02</span> Atmospheric profile must match archive vibe.
+                    <span className="text-[#10b981]">02</span> Atmospheric profile must match archive vibe.
                   </li>
                   <li className="flex items-start gap-3">
-                    <span className="text-[#39FF14]">03</span> Redundant signals will be filtered.
+                    <span className="text-[#10b981]">03</span> Redundant signals will be filtered.
                   </li>
                 </ul>
               </motion.div>

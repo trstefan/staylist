@@ -9,17 +9,17 @@ export async function GET() {
     });
 
     // Transform to Track-compatible format for frontend
-    const tracks = songs.map((song, index) => ({
+    const tracks = songs.map((song) => ({
       id: song.id,
-      number: (index + 1).toString().padStart(2, "0"),
       title: song.title,
       artist: song.artist,
-      album: "User Submission",
-      year: new Date(song.createdAt).getFullYear().toString(),
-      genre: "Curated",
-      description: song.description || "Awaiting curator review.",
-      coverImage: `https://picsum.photos/seed/${song.id}/800/800`,
       url: song.url,
+      description: song.description || "Awaiting curator review.",
+      genre: song.genre,
+      year: song.year,
+      album: song.album,
+      cover: song.cover,
+      createdAt: song.createdAt.toISOString(),
     }));
 
     return NextResponse.json(tracks);
@@ -36,7 +36,7 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { title, artist, url, description } = body;
+    const { title, artist, url, description, genre } = body;
 
     // Validate required fields
     if (!title || !artist) {
@@ -52,6 +52,7 @@ export async function POST(request: NextRequest) {
         artist: artist.trim(),
         url: url?.trim() || null,
         description: description?.trim() || null,
+        genre: Array.isArray(genre) ? genre : [],
       },
     });
 

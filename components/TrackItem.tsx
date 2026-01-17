@@ -5,6 +5,7 @@ import { Track } from "../types";
 
 interface TrackItemProps {
   track: Track;
+  number: string;
   isOpen: boolean;
   onToggle: () => void;
   index: number;
@@ -12,6 +13,7 @@ interface TrackItemProps {
 
 export const TrackItem: React.FC<TrackItemProps> = ({
   track,
+  number,
   isOpen,
   onToggle,
   index,
@@ -41,7 +43,7 @@ export const TrackItem: React.FC<TrackItemProps> = ({
       >
         {/* Number */}
         <div className="col-span-2 md:col-span-1 text-xs font-mono text-muted-foreground group-hover:text-primary transition-colors duration-300 group-hover:neon-text">
-          {track.number}
+          {number}
         </div>
 
         {/* Title & Artist */}
@@ -98,7 +100,7 @@ export const TrackItem: React.FC<TrackItemProps> = ({
             <div className="px-4 md:px-8 pb-12 pt-4 relative">
               {/* Decorative background number */}
               <div className="absolute right-10 top-0 text-[10rem] font-black text-white/5 font-mono pointer-events-none select-none">
-                {track.number}
+                {number}
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 relative z-10">
@@ -106,8 +108,8 @@ export const TrackItem: React.FC<TrackItemProps> = ({
                 <div className="col-span-12 md:col-span-4 relative group/image">
                   <div className="aspect-square bg-neutral-900 overflow-hidden relative shadow-2xl border border-white/10">
                     <img
-                      src={track.coverImage}
-                      alt={track.album}
+                      src={track.cover || `https://picsum.photos/seed/${track.id}/800/800`}
+                      alt={track.album || 'Album Cover'}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover/image:scale-110 grayscale hover:grayscale-0"
                     />
                     <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover/image:opacity-100 transition-all duration-500 backdrop-blur-[2px]">

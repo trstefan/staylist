@@ -13,15 +13,15 @@ export interface Song {
 
 export interface Track {
   id: string;
-  number: string;
   title: string;
   artist: string;
-  album: string;
-  year: string;
-  genre: string;
-  description: string;
-  coverImage: string;
-  url: string;
+  url?: string;
+  description?: string;
+  genre?: string[];
+  year?: number;
+  album?: string;
+  cover?: string;
+  createdAt: string;
 }
 
 export interface NavItem {

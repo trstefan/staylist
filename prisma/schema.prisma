@@ -13,5 +13,9 @@ model Song {
   artist      String
   url         String?
   description String?
+  genre       String[]
+  year        Int?
+  album       String?
+  cover       String?
   createdAt   DateTime @default(now())
 }

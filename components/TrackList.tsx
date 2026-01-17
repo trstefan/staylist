@@ -97,6 +97,7 @@ export const TrackList: React.FC = () => {
               <TrackItem
                 key={track.id}
                 track={track}
+                number={(index + 1).toString().padStart(2, "0")}
                 isOpen={openId === track.id}
                 onToggle={() => handleToggle(track.id)}
                 index={index}
