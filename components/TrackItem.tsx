@@ -166,9 +166,9 @@ export const TrackItem: React.FC<TrackItemProps> = ({
                           x: 5,
                           backgroundColor: "rgba(255,255,255,0.05)",
                         }}
-                        className="w-full text-left py-3 px-4 border border-white/10 transition-all text-sm uppercase tracking-wider flex justify-between items-center group/btn hover:border-primary/30"
+                        className="w-full text-left py-3 px-4 border border-white/10 transition-all text-sm  tracking-wider flex justify-between items-center group/btn hover:border-primary/30"
                       >
-                        Text{" "}
+                        Listen here
                         <ExternalLink
                           size={14}
                           className="text-primary opacity-0 group-hover/btn:opacity-100 transition-opacity"

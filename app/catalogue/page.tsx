@@ -18,7 +18,7 @@ export const Catalogue = () => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-  
+
   const ALL_GENRES = ["All", ...availableGenres];
   const observerTarget = useRef<HTMLDivElement>(null);
 
@@ -46,41 +46,44 @@ export const Catalogue = () => {
     return () => clearTimeout(timer);
   }, [searchTerm]);
 
-  const fetchTracks = useCallback(async (isInitial = false) => {
-    if (loading || (!hasMore && !isInitial)) return;
-    
-    setLoading(true);
-    const currentPage = isInitial ? 1 : page;
-    
-    try {
-      const params = new URLSearchParams({
-        page: currentPage.toString(),
-        limit: "10",
-        sortBy,
-        order,
-      });
-      
-      if (debouncedSearch) params.append("q", debouncedSearch);
-      if (selectedGenre !== "All") params.append("genre", selectedGenre);
+  const fetchTracks = useCallback(
+    async (isInitial = false) => {
+      if (loading || (!hasMore && !isInitial)) return;
 
-      const response = await fetch(`/api/songs?${params.toString()}`);
-      const data = await response.json();
+      setLoading(true);
+      const currentPage = isInitial ? 1 : page;
 
-      if (Array.isArray(data)) {
-        if (isInitial) {
-          setTracks(data);
-        } else {
-          setTracks((prev) => [...prev, ...data]);
+      try {
+        const params = new URLSearchParams({
+          page: currentPage.toString(),
+          limit: "10",
+          sortBy,
+          order,
+        });
+
+        if (debouncedSearch) params.append("q", debouncedSearch);
+        if (selectedGenre !== "All") params.append("genre", selectedGenre);
+
+        const response = await fetch(`/api/songs?${params.toString()}`);
+        const data = await response.json();
+
+        if (Array.isArray(data)) {
+          if (isInitial) {
+            setTracks(data);
+          } else {
+            setTracks((prev) => [...prev, ...data]);
+          }
+          setHasMore(data.length === 10);
+          setPage(currentPage + 1);
         }
-        setHasMore(data.length === 10);
-        setPage(currentPage + 1);
+      } catch (error) {
+        console.error("Failed to fetch tracks:", error);
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      console.error("Failed to fetch tracks:", error);
-    } finally {
-      setLoading(false);
-    }
-  }, [loading, hasMore, page, debouncedSearch, selectedGenre, sortBy, order]);
+    },
+    [loading, hasMore, page, debouncedSearch, selectedGenre, sortBy, order],
+  );
 
   // Initial load and dependency changes
   useEffect(() => {
@@ -97,7 +100,7 @@ export const Catalogue = () => {
           fetchTracks();
         }
       },
-      { threshold: 0.1, rootMargin: "100px" }
+      { threshold: 0.1, rootMargin: "100px" },
     );
 
     if (observerTarget.current) {
@@ -138,17 +141,6 @@ export const Catalogue = () => {
                 Catalogue
               </h1>
             </div>
-
-            <div className="flex flex-col items-end gap-2">
-              <div className="text-right">
-                <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest block mb-1">
-                  Total Records
-                </span>
-                <span className="text-3xl font-bold text-white neon-text">
-                  {tracks.length}+
-                </span>
-              </div>
-            </div>
           </motion.div>
 
           {/* Toolbar */}
@@ -174,9 +166,9 @@ export const Catalogue = () => {
                 className="w-full bg-black/40 border border-white/5 text-white pl-12 pr-4 py-3 text-xs font-mono uppercase tracking-widest outline-none transition-all placeholder:text-white/20"
               />
             </div>
-            
+
             <div className="flex gap-2 w-full md:w-auto">
-              <select 
+              <select
                 value={`${sortBy}-${order}`}
                 onChange={(e) => {
                   const [newSort, newOrder] = e.target.value.split("-");
@@ -218,7 +210,9 @@ export const Catalogue = () => {
                 className="overflow-hidden bg-white/2 border-x border-b border-white/10"
               >
                 <div className="p-6">
-                  <h3 className="text-[10px] font-mono uppercase tracking-[0.3em] text-primary mb-4">Genre Selection</h3>
+                  <h3 className="text-[10px] font-mono uppercase tracking-[0.3em] text-primary mb-4">
+                    Genre Selection
+                  </h3>
                   <div className="flex flex-wrap gap-2">
                     {ALL_GENRES.map((genre) => (
                       <button
