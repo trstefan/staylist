@@ -13,6 +13,8 @@ export async function GET(request: NextRequest) {
     const limit = parseInt(searchParams.get("limit") || "20");
     const skip = (page - 1) * limit;
 
+    console.log(`[GET /api/songs] Params:`, { q, genre, sortBy, order, page, limit });
+    
     const where: any = {};
 
     if (q) {
@@ -23,9 +25,15 @@ export async function GET(request: NextRequest) {
       ];
     }
 
-    if (genre && genre !== "All") {
-      where.genre = { has: genre };
+    if (genre) {
+      const genres = Array.isArray(genre) ? genre : [genre];
+      where.genre = { hasSome: genres };
     }
+
+    // Only fetch approved songs
+    where.isApproved = true;
+
+    console.log(`[GET /api/songs] Querying Prisma with where:`, JSON.stringify(where));
 
     const songs = await prisma.song.findMany({
       where,
@@ -34,8 +42,10 @@ export async function GET(request: NextRequest) {
       take: limit,
     });
 
+    console.log(`[GET /api/songs] Found ${songs.length} songs`);
+
     // Transform to Track-compatible format for frontend
-    const tracks = songs.map((song) => ({
+    const tracks = songs.map((song: any) => ({
       id: song.id,
       title: song.title,
       artist: song.artist,
@@ -46,13 +56,14 @@ export async function GET(request: NextRequest) {
       album: song.album,
       cover: song.cover,
       createdAt: song.createdAt.toISOString(),
+      isApproved: song.isApproved,
     }));
 
     return NextResponse.json(tracks);
-  } catch (error) {
-    console.error("Failed to fetch songs:", error);
+  } catch (error: any) {
+    console.error("[GET /api/songs] Error:", error);
     return NextResponse.json(
-      { error: "Failed to fetch songs" },
+      { error: "Failed to fetch songs", details: error.message },
       { status: 500 }
     );
   }
@@ -79,6 +90,7 @@ export async function POST(request: NextRequest) {
         url: url?.trim() || null,
         description: description?.trim() || null,
         genre: Array.isArray(genre) ? genre : [],
+        isApproved: false, // Explicitly set to false (also handled by @default)
       },
     });
 

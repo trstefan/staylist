@@ -17,5 +17,6 @@ model Song {
   year        Int?
   album       String?
   cover       String?
+  isApproved  Boolean  @default(false)
   createdAt   DateTime @default(now())
 }

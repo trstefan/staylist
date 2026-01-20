@@ -12,7 +12,7 @@ export const Catalogue = () => {
   const [openId, setOpenId] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
-  const [selectedGenre, setSelectedGenre] = useState("All");
+  const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState("createdAt");
   const [order, setOrder] = useState<"asc" | "desc">("desc");
   const [page, setPage] = useState(1);
@@ -62,7 +62,7 @@ export const Catalogue = () => {
         });
 
         if (debouncedSearch) params.append("q", debouncedSearch);
-        if (selectedGenre !== "All") params.append("genre", selectedGenre);
+        selectedGenres.forEach(genre => params.append("genre", genre));
 
         const response = await fetch(`/api/songs?${params.toString()}`);
         const data = await response.json();
@@ -82,7 +82,7 @@ export const Catalogue = () => {
         setLoading(false);
       }
     },
-    [loading, hasMore, page, debouncedSearch, selectedGenre, sortBy, order],
+    [loading, hasMore, page, debouncedSearch, selectedGenres, sortBy, order],
   );
 
   // Initial load and dependency changes
@@ -90,7 +90,7 @@ export const Catalogue = () => {
     setPage(1);
     setHasMore(true);
     fetchTracks(true);
-  }, [debouncedSearch, selectedGenre, sortBy, order]);
+  }, [debouncedSearch, selectedGenres, sortBy, order]);
 
   // Infinite scroll
   useEffect(() => {
@@ -195,8 +195,26 @@ export const Catalogue = () => {
                 whileTap={{ scale: 0.98 }}
                 className={`flex items-center gap-2 px-6 py-3 border transition-colors md:w-auto justify-center text-xs font-mono uppercase tracking-widest ${isFilterOpen ? "border-primary text-primary bg-primary/5" : "border-white/10 text-muted-foreground"}`}
               >
-                <SlidersHorizontal size={14} /> Filter
+                <SlidersHorizontal size={14} /> Filter {selectedGenres.length > 0 && `(${selectedGenres.length})`}
               </motion.button>
+
+              {(searchTerm || selectedGenres.length > 0 || sortBy !== "createdAt" || order !== "desc") && (
+                <motion.button
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  onClick={() => {
+                    setSearchTerm("");
+                    setSelectedGenres([]);
+                    setSortBy("createdAt");
+                    setOrder("desc");
+                  }}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="px-4 py-3 border border-red-500/30 text-red-500/70 hover:text-red-500 hover:bg-red-500/5 text-[10px] font-mono uppercase tracking-widest transition-all"
+                >
+                  Reset
+                </motion.button>
+              )}
             </div>
           </motion.div>
 
@@ -214,15 +232,32 @@ export const Catalogue = () => {
                     Genre Selection
                   </h3>
                   <div className="flex flex-wrap gap-2">
-                    {ALL_GENRES.map((genre) => (
+                    {availableGenres.map((genre) => {
+                      const isSelected = selectedGenres.includes(genre);
+                      return (
+                        <button
+                          key={genre}
+                          onClick={() => {
+                            setSelectedGenres(prev => 
+                              isSelected 
+                                ? prev.filter(g => g !== genre)
+                                : [...prev, genre]
+                            );
+                          }}
+                          className={`px-4 py-2 text-[10px] font-mono uppercase tracking-widest border transition-all ${isSelected ? "border-primary text-primary bg-primary/10" : "border-white/5 text-muted-foreground hover:border-white/20 hover:text-white"}`}
+                        >
+                          {genre}
+                        </button>
+                      );
+                    })}
+                    {selectedGenres.length > 0 && (
                       <button
-                        key={genre}
-                        onClick={() => setSelectedGenre(genre)}
-                        className={`px-4 py-2 text-[10px] font-mono uppercase tracking-widest border transition-all ${selectedGenre === genre ? "border-primary text-primary bg-primary/10" : "border-white/5 text-muted-foreground hover:border-white/20 hover:text-white"}`}
+                        onClick={() => setSelectedGenres([])}
+                        className="px-4 py-2 text-[10px] font-mono uppercase tracking-widest border border-dashed border-white/20 text-muted-foreground hover:border-white/40 hover:text-white transition-all"
                       >
-                        {genre}
+                        Clear Genres
                       </button>
-                    ))}
+                    )}
                   </div>
                 </div>
               </motion.div>

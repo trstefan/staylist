@@ -9,6 +9,7 @@ export interface Song {
   cast?: string;
   runtime?: string;
   imageUrl?: string;
+  isApproved?: boolean;
 }
 
 export interface Track {
