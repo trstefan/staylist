@@ -108,67 +108,72 @@ export const TrackItem: React.FC<TrackItemProps> = ({
                 <div className="col-span-12 md:col-span-4 relative group/image">
                   <div className="aspect-square bg-neutral-900 overflow-hidden relative shadow-2xl border border-white/10">
                     <img
-                      src={track.cover || `https://picsum.photos/seed/${track.id}/800/800`}
-                      alt={track.album || 'Album Cover'}
+                      src={
+                        track.cover ||
+                        `https://picsum.photos/seed/${track.id}/800/800`
+                      }
+                      alt={track.album || "Album Cover"}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover/image:scale-110 grayscale hover:grayscale-0"
                     />
-                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover/image:opacity-100 transition-all duration-500 backdrop-blur-[2px]">
-                      <motion.button
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="w-20 h-20 rounded-full bg-primary text-black flex items-center justify-center pl-1 shadow-[0_0_30px_rgba(45,212,191,0.6)]"
-                      >
-                        <Play fill="currentColor" size={32} />
-                      </motion.button>
-                    </div>
                   </div>
 
                   {/* Technical Specs */}
                   <div className="mt-6 grid grid-cols-2 gap-4 border-t border-white/10 pt-4">
-                    <div className="flex items-center gap-2 text-xs font-mono text-primary/80 col-span-2">
-                      <Disc size={12} className="text-primary" /> {track.genre}
+                    <div className="flex flex-col  gap-2 text-xs font-mono text-primary/80 col-span-2">
+                      <h2 className="text-xl">
+                        {track.title} -{" "}
+                        <span className="text-base">{track.artist}</span>
+                      </h2>
+                      <h3>{track.album}</h3>
+                      <div className="flex items-center gap-2 ">
+                        <Disc size={12} className="text-primary " />
+                        {Array.isArray(track.genre) ? (
+                          track.genre.map((g, i) => (
+                            <span
+                              key={g + i}
+                              className=" text-primary  text-xs font-mono"
+                            >
+                              {g}
+                            </span>
+                          ))
+                        ) : (
+                          <span className="text-primary text-xs font-mono">
+                            {track.genre}
+                          </span>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
 
                 {/* Details Area */}
                 <div className="col-span-12 md:col-span-5 bg-white/3 p-6 md:p-10 border border-white/5 hover:border-white/10 transition-colors">
-                  <h4 className="text-xs font-mono text-primary uppercase mb-6 tracking-widest neon-text">
-                    Synopsis
-                  </h4>
-                  <p className="text-lg md:text-xl font-light leading-relaxed text-gray-200 mb-8 selection:bg-primary/30">
-                    {track.description}
-                  </p>
-                  <p>
-                    
-                  </p>
-                </div>
-
-                {/* Action Area */}
-                <div className="col-span-12 md:col-span-3 flex flex-col justify-between h-full min-h-[200px]">
-                  <div className="space-y-4">
-                    <h4 className="text-xs font-mono text-primary uppercase tracking-widest neon-text">
+                  <div>
+                    <h4 className="text-xs font-mono text-primary uppercase mb-6 tracking-widest neon-text">
+                      Synopsis
+                    </h4>
+                    <p className="text-lg md:text-xl font-light leading-relaxed text-gray-200 mb-8 selection:bg-primary/30">
+                      {track.description}
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-mono text-primary uppercase mb-4 tracking-widest neon-text">
                       Listen
                     </h4>
-                    <div className="flex flex-col gap-3">
-                      {["Spotify", "Apple Music", "Soundcloud"].map(
-                        (platform) => (
-                          <motion.button
-                            key={platform}
-                            whileHover={{
-                              x: 5,
-                              backgroundColor: "rgba(255,255,255,0.05)",
-                            }}
-                            className="w-full text-left py-3 px-4 border border-white/10 transition-all text-sm uppercase tracking-wider flex justify-between items-center group/btn hover:border-primary/30"
-                          >
-                            {platform}{" "}
-                            <ExternalLink
-                              size={14}
-                              className="text-primary opacity-0 group-hover/btn:opacity-100 transition-opacity"
-                            />
-                          </motion.button>
-                        )
-                      )}
+                    <div>
+                      <motion.button
+                        whileHover={{
+                          x: 5,
+                          backgroundColor: "rgba(255,255,255,0.05)",
+                        }}
+                        className="w-full text-left py-3 px-4 border border-white/10 transition-all text-sm uppercase tracking-wider flex justify-between items-center group/btn hover:border-primary/30"
+                      >
+                        Text{" "}
+                        <ExternalLink
+                          size={14}
+                          className="text-primary opacity-0 group-hover/btn:opacity-100 transition-opacity"
+                        />
+                      </motion.button>
                     </div>
                   </div>
                 </div>

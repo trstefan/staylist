@@ -1,11 +1,37 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-// GET /api/songs - Fetch all songs
-export async function GET() {
+// GET /api/songs - Fetch songs with search, filter, and sort
+export async function GET(request: NextRequest) {
   try {
+    const { searchParams } = new URL(request.url);
+    const q = searchParams.get("q");
+    const genre = searchParams.get("genre");
+    const sortBy = searchParams.get("sortBy") || "createdAt";
+    const order = (searchParams.get("order") || "desc") as "asc" | "desc";
+    const page = parseInt(searchParams.get("page") || "1");
+    const limit = parseInt(searchParams.get("limit") || "20");
+    const skip = (page - 1) * limit;
+
+    const where: any = {};
+
+    if (q) {
+      where.OR = [
+        { title: { contains: q, mode: "insensitive" } },
+        { artist: { contains: q, mode: "insensitive" } },
+        { album: { contains: q, mode: "insensitive" } },
+      ];
+    }
+
+    if (genre && genre !== "All") {
+      where.genre = { has: genre };
+    }
+
     const songs = await prisma.song.findMany({
-      orderBy: { createdAt: "desc" },
+      where,
+      orderBy: { [sortBy]: order },
+      skip,
+      take: limit,
     });
 
     // Transform to Track-compatible format for frontend
