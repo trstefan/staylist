@@ -6,14 +6,15 @@ export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const q = searchParams.get("q");
-    const genre = searchParams.get("genre");
+    const genres = searchParams.getAll("genre");
+    const all = searchParams.get("all") === "true";
     const sortBy = searchParams.get("sortBy") || "createdAt";
     const order = (searchParams.get("order") || "desc") as "asc" | "desc";
     const page = parseInt(searchParams.get("page") || "1");
     const limit = parseInt(searchParams.get("limit") || "20");
     const skip = (page - 1) * limit;
 
-    console.log(`[GET /api/songs] Params:`, { q, genre, sortBy, order, page, limit });
+    console.log(`[GET /api/songs] Params:`, { q, genres, all, sortBy, order, page, limit });
     
     const where: any = {};
 
@@ -25,13 +26,14 @@ export async function GET(request: NextRequest) {
       ];
     }
 
-    if (genre) {
-      const genres = Array.isArray(genre) ? genre : [genre];
+    if (genres.length > 0) {
       where.genre = { hasSome: genres };
     }
 
-    // Only fetch approved songs
-    where.isApproved = true;
+    // By default, only fetch approved songs unless 'all=true' is passed
+    if (!all) {
+      where.isApproved = true;
+    }
 
     console.log(`[GET /api/songs] Querying Prisma with where:`, JSON.stringify(where));
 

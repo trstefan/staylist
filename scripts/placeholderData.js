@@ -9,6 +9,7 @@ const placeholderSongs = [
     "year": 2019,
     "album": "After Hours",
     "cover": "https://example.com/covers/after-hours.jpg",
+    "isApproved": true,
     "createdAt": "2024-05-20T10:00:00Z"
   },
   {
@@ -21,6 +22,7 @@ const placeholderSongs = [
     "year": 1975,
     "album": "A Night at the Opera",
     "cover": "https://example.com/covers/queen-opera.jpg",
+    "isApproved": true,
     "createdAt": "2024-05-20T10:05:00Z"
   },
   {
@@ -32,6 +34,7 @@ const placeholderSongs = [
     "year": 2017,
     "album": "÷",
     "cover": "https://example.com/covers/divide.jpg",
+    "isApproved": true,
     "createdAt": "2024-05-20T10:10:00Z"
   },
   {
@@ -42,6 +45,7 @@ const placeholderSongs = [
     "genre": ["Pop", "Disco"],
     "year": 2023,
     "album": "Endless Summer Vacation",
+    "isApproved": true,
     "createdAt": "2024-05-20T10:15:00Z"
   },
   {
@@ -53,6 +57,7 @@ const placeholderSongs = [
     "year": 1982,
     "album": "Thriller",
     "cover": "https://example.com/covers/thriller.jpg",
+    "isApproved": true,
     "createdAt": "2024-05-20T10:20:00Z"
   },
   {
@@ -62,6 +67,7 @@ const placeholderSongs = [
     "genre": ["Pop Rock", "Synth-pop"],
     "year": 2021,
     "album": "F*ck Love 3: Over You",
+    "isApproved": true,
     "createdAt": "2024-05-20T10:25:00Z"
   },
   {
@@ -71,6 +77,7 @@ const placeholderSongs = [
     "genre": ["Disco-pop", "Funk"],
     "year": 2020,
     "album": "Future Nostalgia",
+    "isApproved": true,
     "createdAt": "2024-05-20T10:30:00Z"
   },
   {
@@ -81,6 +88,7 @@ const placeholderSongs = [
     "genre": ["Soft Rock"],
     "year": 1977,
     "album": "Rumours",
+    "isApproved": true,
     "createdAt": "2024-05-20T10:35:00Z"
   },
   {
@@ -90,6 +98,7 @@ const placeholderSongs = [
     "genre": ["Synth-pop", "Indie Pop"],
     "year": 2022,
     "album": "Harry's House",
+    "isApproved": true,
     "createdAt": "2024-05-20T10:40:00Z"
   },
   {
@@ -100,6 +109,7 @@ const placeholderSongs = [
     "genre": ["Grunge", "Alternative Rock"],
     "year": 1991,
     "album": "Nevermind",
+    "isApproved": true,
     "createdAt": "2024-05-20T10:45:00Z"
   },
   {
@@ -109,6 +119,7 @@ const placeholderSongs = [
     "genre": ["Synth-pop"],
     "year": 2019,
     "album": "Lover",
+    "isApproved": true,
     "createdAt": "2024-05-20T10:50:00Z"
   },
   {
@@ -118,6 +129,7 @@ const placeholderSongs = [
     "genre": ["Psychedelic Pop"],
     "year": 2020,
     "album": "Dreamland",
+    "isApproved": true,
     "createdAt": "2024-05-20T10:55:00Z"
   },
   {
@@ -127,6 +139,7 @@ const placeholderSongs = [
     "genre": ["Soul", "Pop"],
     "year": 2010,
     "album": "21",
+    "isApproved": true,
     "createdAt": "2024-05-20T11:00:00Z"
   },
   {
@@ -136,6 +149,7 @@ const placeholderSongs = [
     "genre": ["Soft Rock"],
     "year": 1976,
     "album": "Hotel California",
+    "isApproved": true,
     "createdAt": "2024-05-20T11:05:00Z"
   },
   {
@@ -145,6 +159,7 @@ const placeholderSongs = [
     "genre": ["R&B", "Electropop"],
     "year": 2016,
     "album": "Starboy",
+    "isApproved": true,
     "createdAt": "2024-05-20T11:10:00Z"
   },
   {
@@ -154,6 +169,7 @@ const placeholderSongs = [
     "genre": ["Electropop", "Pop"],
     "year": 2019,
     "album": "When We All Fall Asleep, Where Do We Go?",
+    "isApproved": true,
     "createdAt": "2024-05-20T11:15:00Z"
   },
   {
@@ -164,6 +180,7 @@ const placeholderSongs = [
     "genre": ["Hip Hop"],
     "year": 2002,
     "album": "8 Mile",
+    "isApproved": true,
     "createdAt": "2024-05-20T11:20:00Z"
   },
   {
@@ -173,6 +190,7 @@ const placeholderSongs = [
     "genre": ["Funk", "Pop"],
     "year": 2014,
     "album": "Uptown Special",
+    "isApproved": true,
     "createdAt": "2024-05-20T11:25:00Z"
   },
   {
@@ -182,6 +200,7 @@ const placeholderSongs = [
     "genre": ["Pop Punk", "Emo Pop"],
     "year": 2021,
     "album": "SOUR",
+    "isApproved": true,
     "createdAt": "2024-05-20T11:30:00Z"
   },
   {
@@ -191,6 +210,7 @@ const placeholderSongs = [
     "genre": ["Disco"],
     "year": 1977,
     "album": "Saturday Night Fever",
+    "isApproved": true,
     "createdAt": "2024-05-20T11:35:00Z"
   }
 ]
