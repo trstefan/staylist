@@ -1,7 +1,7 @@
 import "dotenv/config";
 import { Pool } from "pg";
 import { PrismaPg } from "@prisma/adapter-pg";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client/edge";
 
 declare global {
   var prisma: PrismaClient | undefined;
@@ -37,6 +37,4 @@ if (process.env.NODE_ENV !== "production") {
   globalThis.prisma = prisma;
 }
 
-if (process.env.NODE_ENV !== "production") {
-  globalThis.prisma = prisma;
-}
+
