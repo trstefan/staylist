@@ -46,9 +46,9 @@ const MobileNavLink = ({
       initial={{ x: -20, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ delay: 0.1 + index * 0.05 }}
-      className="text-3xl font-black uppercase tracking-tighter text-white hover:text-primary flex items-center gap-4 group"
+      className="text-2xl md:text-3xl font-black uppercase tracking-tighter text-white hover:text-primary flex items-center gap-4 group"
     >
-      <span className="text-xs font-mono text-primary opacity-0 group-hover:opacity-100">
+      <span className="text-[10px] font-mono text-primary opacity-0 group-hover:opacity-100">
         0{index + 1}
       </span>
       {children}

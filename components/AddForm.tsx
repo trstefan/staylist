@@ -49,7 +49,7 @@ export const AddForm: React.FC = () => {
   const labelStyles = "text-[10px] font-mono text-muted-foreground uppercase tracking-widest block mb-2 group-focus-within:text-[#10b981] transition-colors";
 
   return (
-    <div className="relative bg-white/[0.03] border border-white/10 p-8 md:p-12 backdrop-blur-md rounded-sm">
+    <div className="relative bg-white/[0.03] border border-white/10 p-6 md:p-12 backdrop-blur-md rounded-sm">
       <AnimatePresence mode="wait">
         {!isSubmitted ? (
           <motion.form 
@@ -58,13 +58,13 @@ export const AddForm: React.FC = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, x: 20 }}
             onSubmit={handleSubmit}
-            className="space-y-8"
+            className="space-y-6 md:space-y-8"
           >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
               {/* Title */}
               <div className="space-y-1 group">
                 <label className={labelStyles}>
-                  <span className="flex items-center gap-2"><Music size={10}/> Sonic Identifier</span>
+                  <span className="flex items-center gap-2 text-[9px] md:text-[10px]"><Music size={10}/> Sonic Identifier</span>
                 </label>
                 <input 
                   required
@@ -78,7 +78,7 @@ export const AddForm: React.FC = () => {
               {/* Artist */}
               <div className="space-y-1 group">
                 <label className={labelStyles}>
-                  <span className="flex items-center gap-2"><User size={10}/> Origin Artist</span>
+                  <span className="flex items-center gap-2 text-[9px] md:text-[10px]"><User size={10}/> Origin Artist</span>
                 </label>
                 <input 
                   required
@@ -94,7 +94,7 @@ export const AddForm: React.FC = () => {
             {/* URL - Optional */}
             <div className="space-y-1 group">
               <label className={labelStyles}>
-                <span className="flex items-center gap-2"><LinkIcon size={10}/> Data Link (Optional)</span>
+                <span className="flex items-center gap-2 text-[9px] md:text-[10px]"><LinkIcon size={10}/> Data Link (Optional)</span>
               </label>
               <input 
                 type="url" 
@@ -108,7 +108,7 @@ export const AddForm: React.FC = () => {
             {/* Description */}
             <div className="space-y-1 group">
               <label className={labelStyles}>
-                <span className="flex items-center gap-2"><MessageSquare size={10}/> Atmospheric Profile</span>
+                <span className="flex items-center gap-2 text-[9px] md:text-[10px]"><MessageSquare size={10}/> Atmospheric Profile</span>
               </label>
               <textarea 
                 rows={4}
@@ -122,7 +122,7 @@ export const AddForm: React.FC = () => {
             {/* Genre - Optional */}
             <div className="space-y-1 group">
               <label className={labelStyles}>
-                <span className="flex items-center gap-2"><Disc size={10}/> Frequency Type (Optional)</span>
+                <span className="flex items-center gap-2 text-[9px] md:text-[10px]"><Disc size={10}/> Frequency Type (Optional)</span>
               </label>
               <input 
                 type="text" 
@@ -131,7 +131,7 @@ export const AddForm: React.FC = () => {
                 value={formData.genre}
                 onChange={e => setFormData({...formData, genre: e.target.value})}
               />
-              <span className="text-[9px] font-mono text-muted-foreground/50 uppercase tracking-wider">Separate multiple genres with commas</span>
+              <span className="text-[8px] md:text-[9px] font-mono text-muted-foreground/50 uppercase tracking-wider">Separate multiple genres with commas</span>
             </div>
 
             {error && (
@@ -143,12 +143,12 @@ export const AddForm: React.FC = () => {
             <NeonButton 
               type="submit"
               disabled={isLoading}
-              className="w-full h-16 bg-[#10b981] text-black hover:bg-white border-none shadow-[0_0_20px_rgba(57,255,20,0.3)] disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full h-14 md:h-16 bg-[#10b981] text-black hover:bg-white border-none shadow-[0_0_20px_rgba(57,255,20,0.3)] disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? (
-                <><Loader2 size={18} className="mr-2 animate-spin" /> Transmitting...</>
+                <><Loader2 size={16} className="mr-2 animate-spin" /> Transmitting...</>
               ) : (
-                <><Zap size={18} className="mr-2" /> Initialize Transfer</>
+                <><Zap size={16} className="mr-2" /> Initialize Transfer</>
               )}
             </NeonButton>
           </motion.form>

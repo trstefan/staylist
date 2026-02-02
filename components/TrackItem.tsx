@@ -39,24 +39,24 @@ export const TrackItem: React.FC<TrackItemProps> = ({
             ? "rgba(255,255,255,0.05)"
             : "rgba(255,255,255,0.02)",
         }}
-        className="grid grid-cols-12 gap-4 py-8 px-4 md:px-8 cursor-pointer items-center relative z-10"
+        className="grid grid-cols-12 gap-2 md:gap-4 py-6 md:py-8 px-4 md:px-8 cursor-pointer items-center relative z-10"
       >
         {/* Number */}
-        <div className="col-span-2 md:col-span-1 text-xs font-mono text-muted-foreground group-hover:text-primary transition-colors duration-300 group-hover:neon-text">
+        <div className="col-span-1 text-[10px] md:text-xs font-mono text-muted-foreground group-hover:text-primary transition-colors duration-300 group-hover:neon-text">
           {number}
         </div>
 
         {/* Title & Artist */}
-        <div className="col-span-8 md:col-span-5 flex flex-col md:flex-row md:items-baseline gap-2">
+        <div className="col-span-9 md:col-span-5 flex flex-col md:flex-row md:items-baseline gap-1 md:gap-2">
           <h3
-            className={`text-xl md:text-3xl font-bold uppercase tracking-tight transition-all duration-300 ${isOpen ? "text-transparent bg-clip-text bg-linear-to-r from-primary to-accent neon-text" : "text-white group-hover:text-white"}`}
+            className={`text-lg md:text-3xl font-bold uppercase tracking-tight transition-all duration-300 ${isOpen ? "text-transparent bg-clip-text bg-linear-to-r from-primary to-accent neon-text" : "text-white group-hover:text-white"}`}
           >
             {track.title}
           </h3>
           <span className="hidden md:inline-block text-muted-foreground/40 mx-2">
             —
           </span>
-          <span className="text-sm md:text-lg text-muted-foreground uppercase tracking-widest font-medium group-hover:text-gray-300 transition-colors">
+          <span className="text-[10px] md:text-lg text-muted-foreground uppercase tracking-widest font-medium group-hover:text-gray-300 transition-colors">
             {track.artist}
           </span>
         </div>
@@ -79,7 +79,7 @@ export const TrackItem: React.FC<TrackItemProps> = ({
             transition={{ type: "spring", stiffness: 200, damping: 15 }}
             className={`w-10 h-10 md:w-12 md:h-12 rounded-full border flex items-center justify-center transition-all duration-300 ${isOpen ? "border-primary text-primary bg-primary/10 shadow-[0_0_20px_rgba(45,212,191,0.3)]" : "border-white/10 text-white group-hover:border-primary group-hover:text-primary"}`}
           >
-            {isOpen ? <Minus size={18} /> : <Plus size={18} />}
+            {isOpen ? <Minus size={16} /> : <Plus size={16} />}
           </motion.button>
         </div>
       </motion.div>
@@ -99,7 +99,7 @@ export const TrackItem: React.FC<TrackItemProps> = ({
 
             <div className="px-4 md:px-8 pb-12 pt-4 relative">
               {/* Decorative background number */}
-              <div className="absolute right-10 top-0 text-[10rem] font-black text-white/5 font-mono pointer-events-none select-none">
+              <div className="absolute right-4 md:right-10 top-0 text-[5rem] md:text-[10rem] font-black text-white/5 font-mono pointer-events-none select-none">
                 {number}
               </div>
 
@@ -120,24 +120,24 @@ export const TrackItem: React.FC<TrackItemProps> = ({
                   {/* Technical Specs */}
                   <div className="mt-6 grid grid-cols-2 gap-4 border-t border-white/10 pt-4">
                     <div className="flex flex-col  gap-2 text-xs font-mono text-primary/80 col-span-2">
-                      <h2 className="text-xl">
+                      <h2 className="text-lg md:text-xl">
                         {track.title} -{" "}
-                        <span className="text-base">{track.artist}</span>
+                        <span className="text-sm md:text-base">{track.artist}</span>
                       </h2>
-                      <h3>{track.album}</h3>
+                      <h3 className="text-[10px] md:text-xs">{track.album}</h3>
                       <div className="flex items-center gap-2 ">
                         <Disc size={12} className="text-primary " />
                         {Array.isArray(track.genre) ? (
                           track.genre.map((g, i) => (
                             <span
                               key={g + i}
-                              className=" text-primary  text-xs font-mono"
+                              className=" text-primary  text-[10px] md:text-xs font-mono"
                             >
                               {g}
                             </span>
                           ))
                         ) : (
-                          <span className="text-primary text-xs font-mono">
+                          <span className="text-primary text-[10px] md:text-xs font-mono">
                             {track.genre}
                           </span>
                         )}
@@ -147,12 +147,12 @@ export const TrackItem: React.FC<TrackItemProps> = ({
                 </div>
 
                 {/* Details Area */}
-                <div className="col-span-12 md:col-span-5 bg-white/3 p-6 md:p-10 border border-white/5 hover:border-white/10 transition-colors">
+                <div className="col-span-12 md:col-span-5 bg-white/3 p-4 md:p-10 border border-white/5 hover:border-white/10 transition-colors">
                   <div>
-                    <h4 className="text-xs font-mono text-primary uppercase mb-6 tracking-widest neon-text">
+                    <h4 className="text-[10px] md:text-xs font-mono text-primary uppercase mb-4 md:mb-6 tracking-widest neon-text">
                       Synopsis
                     </h4>
-                    <p className="text-lg md:text-xl font-light leading-relaxed text-gray-200 mb-8 selection:bg-primary/30">
+                    <p className="text-base md:text-xl font-light leading-relaxed text-gray-200 mb-8 selection:bg-primary/30">
                       {track.description}
                     </p>
                   </div>

@@ -62,7 +62,7 @@ export const Hero: React.FC = () => {
     <section
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="relative min-h-dvh w-full flex flex-col justify-between items-center overflow-hidden bg-background selection:bg-primary/30 perspective-1000 pt-24 pb-12 md:pt-20"
+      className="relative min-h-dvh w-full flex flex-col justify-between items-center overflow-hidden bg-background selection:bg-primary/30 perspective-1000 pt-24 pb-12 md:pt-32"
     >
       {/* Dynamic Spotlight Background */}
       <motion.div
@@ -83,7 +83,7 @@ export const Hero: React.FC = () => {
       </motion.div>
 
       {/* Grid Overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-size-[60px_60px] mask-[radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none z-0" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-size-[40px_40px] md:bg-size-[60px_60px] mask-[radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none z-0" />
 
       {/* Technical Decoration - Safe positioning */}
       <motion.div
@@ -95,7 +95,7 @@ export const Hero: React.FC = () => {
             <div className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse"></div>{" "}
             LIVE SIGNAL
           </span>
-          <span className="tracking-widest hidden md:block">
+          <span className="tracking-widest hidden sm:block">
             FREQ: 44.1KHZ // BIT: 24
           </span>
         </div>
@@ -105,18 +105,16 @@ export const Hero: React.FC = () => {
       </motion.div>
 
       {/* Content Container - Flex center for the main block */}
-      <div className="container mx-auto px-4 relative z-10 w-full grow flex flex-col justify-center">
+      <div className="container mx-auto px-4 relative z-10 w-full grow flex flex-col justify-center py-12">
         <div className="flex flex-col items-center justify-center relative w-full">
           {/* Intro Label */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 0.8 }}
-            className="mb-6 md:mb-10 overflow-hidden"
+            className="mb-4 md:mb-10 overflow-hidden"
           >
-            <span className="inline-block text-primary text-[10px] font-semibold font-mono uppercase tracking-[0.5em] border border-primary/20 px-4 py-1 rounded-full bg-primary/5 backdrop-blur-sm">
-              The
-            </span>
+        
           </motion.div>
 
           {/* Main Typography with Neon Glow */}
@@ -125,7 +123,7 @@ export const Hero: React.FC = () => {
             className="relative z-10 text-center w-full"
           >
             <motion.div
-              className="flex flex-wrap justify-center items-center gap-0 lg:gap-2"
+              className="flex flex-wrap justify-center items-center gap-x-0 md:gap-x-2"
               variants={containerVariants}
               initial="hidden"
               animate="visible"
@@ -140,8 +138,9 @@ export const Hero: React.FC = () => {
                     textShadow:
                       "0 0 20px rgba(45, 212, 191, 0.8), 0 0 40px rgba(45, 212, 191, 0.4), 0 0 60px rgba(168, 85, 247, 0.4)",
                   }}
-                  className="inline-block text-[13vw] md:text-[15vw] font-black tracking-tighter leading-[0.8] text-white mix-blend-difference transition-all duration-500 cursor-default select-none relative group"
+                  className="inline-block font-black tracking-tighter leading-[0.8] text-white mix-blend-difference transition-all duration-500 cursor-default select-none relative group"
                   style={{
+                    fontSize: "var(--text-fluid-hero)",
                     textShadow:
                       "0 0 10px rgba(255,255,255,0.1), 0 0 20px rgba(45, 212, 191, 0.15)",
                   }}

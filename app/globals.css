@@ -26,6 +26,12 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  /* Fluid Typography Tokens */
+  --text-fluid-hero: clamp(3.5rem, 15vw, 12rem);
+  --text-fluid-h1: clamp(2rem, 8vw, 4rem);
+  --text-fluid-h2: clamp(1.5rem, 5vw, 2.5rem);
+  --text-fluid-body: clamp(0.875rem, 2vw, 1.125rem);
 }
 
 :root {
